@@ -14,6 +14,7 @@ class UsersIndexTest < ActionDispatch::IntegrationTest
     assert_select 'div.pagination'
     first_page_of_users = User.paginate(page: 1)
     first_page_of_users.each do |user|
+      assert user.activated?
       assert_select "img" do
         assert_select "[alt=?]", user.name
       end
